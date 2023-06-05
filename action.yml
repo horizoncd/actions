@@ -1,8 +1,8 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'horizon-deploy'
+description: 'deploy your changes to horizon'
+author: 'horizoncd'
 inputs:
-  token: # change this
+  token:
     required: true
     description: 'token with cluster-write permissions for horizon'
   addr:
