@@ -1,3 +1,4 @@
+import axios from 'axios';
 export interface DeployRequest {
   title: string
   description: string
@@ -60,23 +61,23 @@ export class HorizonBase {
       data = body ? JSON.stringify(body) : undefined
     }
 
-    const resp = await fetch(url, {
+    const resp = await axios.request({
+      url: url.toString(),
       method,
-      body: data,
+      data,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.token}`
       }
     })
 
-    if (!resp.ok) {
-      throw new Error(`${resp.status} ${resp.statusText}: ${await resp.text()}`)
+    if (resp.status !== 200) {
+      throw new Error(`${resp.status} ${resp.statusText}: ${resp.data}`)
     }
-    const respData = await resp.json()
-    if (respData && respData.data) {
-      return respData.data
-    }
-    throw new Error(`${resp.status} ${resp.statusText}: ${await resp.text()}`)
+
+    const d = resp.data as HorizonResponse<Resp>
+    return d.data
+    // throw new Error(`${resp.status} ${resp.statusText}: ${await resp.text()}`)
   }
 
   async deploy(
