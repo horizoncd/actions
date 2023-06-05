@@ -1,0 +1,35 @@
+name: 'Your name here'
+description: 'Provide a description here'
+author: 'Your name or organization here'
+inputs:
+  token: # change this
+    required: true
+    description: 'token with cluster-write permissions for horizon'
+  addr:
+    required: true
+    description: 'address of the horizon instance'
+  deployMethod:
+    required: true
+    description: 'method to deploy the app'
+  title:
+    required: true
+    description: 'title of the releasing'
+  description:
+    required: false
+    description: 'description of the releasing'
+    default: 'default value if empty'
+  clusterID:
+    required: true 
+    description: 'clusterID of the releasing, must be an number'
+  tag:
+    required: false
+    description: 'tag of the image which are going to be deployed, required if deployMethod is "imageDeploy"'
+  gitRefType:
+    required: false
+    description: 'branch, tag or commit only, required if deployMethod is "buildDeploy"'
+  ref:
+    required: false
+    description: 'depends on "gitRefType", required if deployMethod is "buildDeploy"'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
