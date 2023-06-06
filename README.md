@@ -1,105 +1,44 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+<a href="https://github.com/horizoncd/actions"><img alt="actions status" src="https://github.com/horizoncd/actions/workflows/check-dist/badge.svg"></a>
 
-# Create a JavaScript Action using TypeScript
+This action will trigger the deployment on Horizon.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+## Inputs
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+### `Token`
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+**Required** The token to use for authentication and authorization in horizon.
 
-## Create an action from this template
+### `addr`
 
-Click the `Use this Template` and provide the new repo details for your action
+**Required** The address of the horizon instance to deploy to. In the form of `http://<ip>:<port>`.
 
-## Code in Main
+### `deployMethod`
 
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
+**Required** The method to use for deployment. Can be either `buildDeploy` or `imageDeploy`.
 
-Install the dependencies  
-```bash
-$ npm install
-```
+* `buildDeploy` will build the docker image and deploy it to the horizon instance.
+* `imageDeploy` will deploy the versioned image specified in the `tag` input to the horizon instance.
 
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
-```
+### `title`
 
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
+**Required** The title of the deployment.
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
+### `description`
 
-...
-```
+**Optional** The description of the deployment.
 
-## Change action.yml
+### `clusterID`
 
-The action.yml defines the inputs and output for your action.
+**Required** The ID of cluster whose deployment will be triggered.
 
-Update the action.yml with your name, description, inputs and outputs for your action.
+### `tag`
 
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
+**Optional** The tag of the image to deploy. Only used if `deployMethod` is set to `imageDeploy`.
 
-## Change the Code
+### `gitRefType`
 
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
+**Optional** The type of git ref to use for the deployment. Can be `branch`, `tag`, or `commit`.
 
-```javascript
-import * as core from '@actions/core';
-...
+### `ref`
 
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
-
-```yaml
-uses: ./
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
-
-## Usage:
-
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
+**Optional** The git ref to use for the deployment. Only used if `gitRefType` is set to `branch` or `tag`.

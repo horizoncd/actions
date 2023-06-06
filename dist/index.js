@@ -62,12 +62,12 @@ class HorizonBase {
             // throw new Error(`${resp.status} ${resp.statusText}: ${await resp.text()}`)
         });
     }
-    deploy(cluster_id, title, tag, description) {
+    deploy(cluster_id, title, imageTag, description) {
         return __awaiter(this, void 0, void 0, function* () {
             const body = {
                 title,
                 description: description !== null && description !== void 0 ? description : '',
-                tag
+                imageTag
             };
             return this.request(`/apis/core/v2/clusters/${cluster_id}/deploy`, {
                 method: 'POST',

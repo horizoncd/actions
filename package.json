@@ -25,10 +25,10 @@
   },
   "keywords": [
     "actions",
-    "node",
-    "setup"
+    "cloudnative",
+    "cd"
   ],
-  "author": "",
+  "author": "horizoncd",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.0",

@@ -10,7 +10,7 @@ inputs:
     description: 'address of the horizon instance'
   deployMethod:
     required: true
-    description: 'method to deploy the app'
+    description: 'buildDeploy or imageDeploy, method to deploy the app'
   title:
     required: true
     description: 'title of the releasing'

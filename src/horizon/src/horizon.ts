@@ -2,7 +2,7 @@ import axios from 'axios';
 export interface DeployRequest {
   title: string
   description: string
-  tag?: string
+  imageTag?: string
 }
 
 export interface HorizonResponse<T> {
@@ -77,21 +77,20 @@ export class HorizonBase {
 
     const d = resp.data as HorizonResponse<Resp>
     return d.data
-    // throw new Error(`${resp.status} ${resp.statusText}: ${await resp.text()}`)
   }
 
   async deploy(
     cluster_id: number,
     title: string,
-    tag?: string,
+    imageTag?: string,
     description?: string
   ): Promise<DeployResponse> {
     const body: DeployRequest = {
       title,
       description: description ?? '',
-      tag
+      imageTag
     }
-    return this.request(`/apis/core/v2/clusters/${cluster_id}/deploy`, {
+    return await this.request(`/apis/core/v2/clusters/${cluster_id}/deploy`, {
       method: 'POST',
       body
     })
@@ -109,7 +108,7 @@ export class HorizonBase {
       description: description ?? '',
       [gitRefType]: ref
     }
-    return this.request(`/apis/core/v2/clusters/${cluster_id}/builddeploy`, {
+    return await this.request(`/apis/core/v2/clusters/${cluster_id}/builddeploy`, {
       method: 'POST',
       body
     })
