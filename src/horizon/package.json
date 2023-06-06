@@ -1,6 +1,6 @@
 {
   "name": "horizoncd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "js sdk to horizon",
   "author": "kiloson",
   "license": "Apache-2.0",
@@ -13,8 +13,10 @@
   "files": [
     "lib/",
     "bin/",
+    "README.md",
     "package.json"
   ],
+  "keywords": ["cli", "cloud-native", "deploy", "kubernetes", "k8s"],
   "homepage": "https://github.com/horizoncd/actions",
   "scripts": {
     "build": "tsc"
