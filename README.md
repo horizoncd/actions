@@ -1,4 +1,4 @@
-<a href="https://github.com/horizoncd/actions"><img alt="actions status" src="https://github.com/horizoncd/actions/workflows/check-dist/badge.svg"></a>
+[![Check dist/](https://github.com/horizoncd/actions/actions/workflows/check-dist.yml/badge.svg)](https://github.com/horizoncd/actions/actions/workflows/check-dist.yml)
 
 This action will trigger the deployment on Horizon.
 

@@ -59,7 +59,6 @@ class HorizonBase {
             }
             const d = resp.data;
             return d.data;
-            // throw new Error(`${resp.status} ${resp.statusText}: ${await resp.text()}`)
         });
     }
     deploy(cluster_id, title, imageTag, description) {
@@ -69,7 +68,7 @@ class HorizonBase {
                 description: description !== null && description !== void 0 ? description : '',
                 imageTag
             };
-            return this.request(`/apis/core/v2/clusters/${cluster_id}/deploy`, {
+            return yield this.request(`/apis/core/v2/clusters/${cluster_id}/deploy`, {
                 method: 'POST',
                 body
             });
@@ -82,7 +81,7 @@ class HorizonBase {
                 description: description !== null && description !== void 0 ? description : '',
                 [gitRefType]: ref
             };
-            return this.request(`/apis/core/v2/clusters/${cluster_id}/builddeploy`, {
+            return yield this.request(`/apis/core/v2/clusters/${cluster_id}/builddeploy`, {
                 method: 'POST',
                 body
             });
